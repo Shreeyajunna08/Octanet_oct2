@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative To-Do List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #009688;
+            font-size: 2rem;
+        }
+
+        .input-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        #taskInput {
+            width: 70%;
+            padding: 12px;
+            border: 2px solid #009688;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        #addTaskBtn {
+            padding: 12px 20px;
+            border: none;
+            background-color: #009688;
+            color: white;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #addTaskBtn:hover {
+            background-color: #00796b;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            background-color: #e0f2f1;
+            padding: 12px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            border-left: 6px solid #009688;
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        li:hover {
+            transform: scale(1.02);
+        }
+
+        li .deleteBtn {
+            background-color: #009688;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        li .deleteBtn:hover {
+            background-color: #00796b;
+        }
+
+        /* Background image styling */
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('file:///C:/Users/Sai%20tarun/Downloads/DALL%C2%B7E%202024-09-30%2020.37.58%20-%20A%20calming%20and%20aesthetically%20pleasing%20background%20with%20a%20soft%20gradient%20blending%20light%20blue%20and%20pastel%20tones,%20featuring%20subtle%20geometric%20patterns%20and%20abs.webp'); /* Use the actual path to the image in your project folder */
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-image"></div>
+    <div class="container">
+        <h1>My Creative To-Do List</h1>
+        <div class="input-container">
+            <input type="text" id="taskInput" placeholder="Add a new task...">
+            <button id="addTaskBtn">Add Task</button>
+        </div>
+        <ul id="taskList"></ul>
+    </div>
+
+    <script>
+        // JavaScript for adding and removing tasks
+        document.getElementById('addTaskBtn').addEventListener('click', function () {
+            const taskInput = document.getElementById('taskInput');
+            const task = taskInput.value.trim();
+
+            if (task !== '') {
+                const taskList = document.getElementById('taskList');
+
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    ${task}
+                    <button class="deleteBtn">Delete</button>
+                `;
+
+                taskList.appendChild(li);
+
+                // Clear input field
+                taskInput.value = '';
+
+                // Add delete functionality
+                li.querySelector('.deleteBtn').addEventListener('click', function () {
+                    li.remove();
+                });
+            }
+        });
+
+        // Enter key adds task
+        document.getElementById('taskInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                document.getElementById('addTaskBtn').click();
+            }
+        });
+    </script>
+
+</body>
+</html>
